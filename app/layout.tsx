@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { company } from "@/lib/site-data";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,19 +17,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "[COMPANY NAME] | Telemarketing & BPO Services",
-  description: "Placeholder company description for a telemarketing, lead generation, and BPO website.",
+  title: `${company.name} | ${company.tagline}`,
+  description: company.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full bg-slate-950 text-slate-100">
-        <div className="flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
+      style={{ colorScheme: "dark" }}
+    >
+      <body
+        className="min-h-full bg-slate-950 text-slate-100 flex flex-col selection:bg-sky-500 selection:text-slate-950"
+        style={{ backgroundColor: "#020617", color: "#f8fafc" }}
+      >
+        <Navbar />
+        <main className="flex-1 bg-slate-950 text-slate-100">{children}</main>
+        <Footer />
       </body>
     </html>
   );

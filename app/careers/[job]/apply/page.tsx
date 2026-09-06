@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import JobApplicationForm from "@/components/JobApplicationForm";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
@@ -7,38 +9,42 @@ export function generateStaticParams() {
   return jobs.map((job) => ({ job: job.slug }));
 }
 
-export default function JobApplyPage({ params }: { params: { job: string } }) {
-  const jobSlug = params.job;
+type Props = {
+  params: Promise<{ job: string }>;
+};
+
+export default async function JobApplyPage({ params }: Props) {
+  const { job: jobSlug } = await params;
   const job = jobs.find((item) => item.slug === jobSlug);
 
   if (!job) {
-    return <div className="mx-auto max-w-7xl px-4 py-20">Job not found.</div>;
+    notFound();
   }
 
   return (
     <>
       <PageHero
-        eyebrow="Apply"
+        eyebrow="Application"
         title={`Apply for ${job.title}`}
-        description="Tell us a bit about yourself and we’ll review your application for this role."
+        description="Submit your details below and our team will review your application."
       />
 
       <section className="mx-auto max-w-5xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] items-start">
           <div>
             <SectionHeading
-              eyebrow="Role summary"
+              eyebrow="Position Overview"
               title={job.title}
               description={job.summary}
             />
-            <div className="mt-6 rounded-2xl border border-white/10 bg-slate-900 p-5 text-sm text-slate-300">
-              <div>{job.department}</div>
-              <div className="mt-2">{job.location}</div>
-              <div className="mt-2">{job.employmentType}</div>
+            <div className="mt-6 rounded-2xl border border-white/10 bg-slate-900 p-5 text-sm text-slate-300 space-y-2">
+              <div><span className="font-semibold text-white">Department:</span> {job.department}</div>
+              <div><span className="font-semibold text-white">Location:</span> {job.location}</div>
+              <div><span className="font-semibold text-white">Type:</span> {job.employmentType}</div>
             </div>
           </div>
 
-          <JobApplicationForm />
+          <JobApplicationForm defaultPosition={job.title} />
         </div>
       </section>
     </>

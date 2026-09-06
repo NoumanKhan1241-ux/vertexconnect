@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { company, navigation, services } from "@/lib/site-data";
 
@@ -7,20 +8,32 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-sky-400/30 bg-sky-500/10 text-sm font-semibold text-sky-300">
-                {company.shortName.slice(0, 2).toUpperCase()}
+            <Link href="/" className="flex items-center gap-3.5 group" aria-label="Vertex Connect Home">
+              <div className="relative flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-sky-400/20 bg-slate-900/90 p-1.5 shadow-sm transition group-hover:border-sky-400/40">
+                <Image
+                  src="/VC_Logo.png"
+                  alt="Vertex Connect Logo"
+                  width={44}
+                  height={44}
+                  className="h-full w-full object-contain"
+                />
               </div>
               <div>
-                <div className="text-sm font-semibold tracking-[0.22em] text-slate-200 uppercase">
-                  {company.shortName}
+                <div className="text-base font-bold tracking-tight text-white">
+                  {company.name}
                 </div>
-                <div className="text-[10px] text-slate-400">{company.tagline}</div>
+                <div className="text-[11px] font-medium tracking-wide text-sky-400">
+                  {company.tagline}
+                </div>
               </div>
-            </div>
+            </Link>
             <p className="mt-5 max-w-md text-sm leading-7 text-slate-300">
-              {company.description}
+              Professional calling, lead generation, sales, and customer support solutions for businesses around the world.
             </p>
+            <div className="mt-4 flex items-center gap-2 text-xs font-medium text-slate-400">
+              <span className="inline-block h-2 w-2 rounded-full bg-emerald-400"></span>
+              <span>Headquartered in {company.location} • Serving Worldwide</span>
+            </div>
           </div>
 
           <div>
@@ -39,7 +52,7 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-200">Services</h3>
             <ul className="mt-5 space-y-3 text-sm text-slate-300">
-              {services.slice(0, 6).map((service) => (
+              {services.map((service) => (
                 <li key={service.slug}>
                   <Link href={`/services/${service.slug}`} className="transition hover:text-white">
                     {service.title}
@@ -50,18 +63,27 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-200">Contact</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-200">Location & Inquiry</h3>
             <ul className="mt-5 space-y-3 text-sm text-slate-300">
-              <li>{company.phone}</li>
-              <li>{company.email}</li>
-              <li>{company.address}</li>
+              <li className="text-slate-200 font-medium">{company.location}</li>
+              <li className="text-xs text-slate-400">Worldwide Service Availability</li>
+              {company.phone && <li>{company.phone}</li>}
+              {company.email && <li>{company.email}</li>}
+              <li className="pt-2">
+                <Link
+                  href="/contact"
+                  className="inline-flex text-xs font-semibold text-sky-400 hover:text-sky-300 transition"
+                >
+                  Discuss Your Campaign →
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
           <p>© 2026 {company.name}. All rights reserved.</p>
-          <div className="flex gap-5">
+          <div className="flex gap-6 text-xs text-slate-400">
             <Link href="/privacy" className="transition hover:text-white">
               Privacy Policy
             </Link>

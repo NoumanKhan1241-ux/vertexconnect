@@ -14,17 +14,15 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3.5 group" aria-label="Vertex Connect Home">
-          <div className="relative flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-sky-400/20 bg-slate-900/90 p-1.5 shadow-sm transition group-hover:border-sky-400/40">
-            <Image
-              src="/VC_Logo.png"
-              alt="Vertex Connect Logo"
-              width={44}
-              height={44}
-              className="h-full w-full object-contain"
-              priority
-            />
-          </div>
+        <Link href="/" className="flex items-center gap-3 group" aria-label="Vertex Connect Home">
+          <Image
+            src="/Logo.png"
+            alt="Vertex Connect Logo"
+            width={180}
+            height={180}
+            className="h-14 w-14 object-contain transition-transform group-hover:scale-105"
+            priority
+          />
           <div>
             <div className="text-base font-bold tracking-tight text-white group-hover:text-sky-300 transition">
               {company.name}

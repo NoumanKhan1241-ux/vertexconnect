@@ -8,16 +8,14 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3.5 group" aria-label="Vertex Connect Home">
-              <div className="relative flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-sky-400/20 bg-slate-900/90 p-1.5 shadow-sm transition group-hover:border-sky-400/40">
-                <Image
-                  src="/VC_Logo.png"
-                  alt="Vertex Connect Logo"
-                  width={44}
-                  height={44}
-                  className="h-full w-full object-contain"
-                />
-              </div>
+            <Link href="/" className="flex items-center gap-3 group" aria-label="Vertex Connect Home">
+              <Image
+                src="/Logo.png"
+                alt="Vertex Connect Logo"
+                width={240}
+                height={240}
+                className="h-14 w-14 object-contain transition-transform group-hover:scale-105"
+              />
               <div>
                 <div className="text-base font-bold tracking-tight text-white">
                   {company.name}
